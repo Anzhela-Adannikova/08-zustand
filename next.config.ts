@@ -1,7 +1,14 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  /* config options here */
+  images: {
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "ac.goit.global/fullstack/react/notehub-og-meta.jpg",
+      },
+    ],
+  },
 };
 
 export default nextConfig;
