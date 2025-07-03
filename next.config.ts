@@ -5,7 +5,7 @@ const nextConfig: NextConfig = {
     remotePatterns: [
       {
         protocol: "https",
-        hostname: "ac.goit.global/fullstack/react/notehub-og-meta.jpg",
+        hostname: "ac.goit.global",
       },
     ],
   },

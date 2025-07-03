@@ -4,6 +4,7 @@
 import React, { useEffect, useState } from "react";
 import css from "./Modal.module.css";
 import { createPortal } from "react-dom";
+import { useRouter } from "next/navigation";
 
 interface ModalProps {
   children: React.ReactNode;
@@ -12,9 +13,15 @@ interface ModalProps {
 
 export default function Modal({ onClose, children }: ModalProps) {
   const [mounted, setMounted] = useState(false);
+  const router = useRouter();
+
+  const handleClose = () => {
+    router.back();
+  };
 
   useEffect(() => {
     setMounted(true);
+
     const handleEsc = (event: KeyboardEvent) => {
       if (event.key === "Escape") onClose();
     };
@@ -30,7 +37,9 @@ export default function Modal({ onClose, children }: ModalProps) {
   }, [onClose]);
 
   const handleBackdropClose = (event: React.MouseEvent<HTMLDivElement>) => {
-    if (event.target === event.currentTarget) onClose();
+    if (event.target === event.currentTarget) {
+      handleClose();
+    }
   };
 
   if (!mounted) return null;

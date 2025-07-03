@@ -1,18 +1,15 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import Header from "@/components/Header/Header";
 import Footer from "@/components/Footer/Footer";
 import TanStackProvider from "@/components/TanStackProvider/TanStackProvider";
+import { Roboto } from "next/font/google";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
+const robotoFont = Roboto({
+  weight: ["400", "700"],
+  variable: "--custom-font",
+  display: "swap",
+  subsets: ["latin-ext"],
 });
 
 export const metadata: Metadata = {
@@ -42,7 +39,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${geistSans.variable} ${geistMono.variable}`}>
+      <body className={robotoFont.variable}>
         <TanStackProvider>
           <Header />
           {children}
@@ -53,3 +50,34 @@ export default function RootLayout({
     </html>
   );
 }
+
+// export const generateMetadata = async ({
+//   params,
+// }: FilteredNotesPageProps): Promise<Metadata> => {
+//   const { slug } = await params; // ✅ обовʼязковий await
+//   const tag = slug[0] === "All" ? undefined : slug[0];
+
+//   return {
+//     title: tag ? `Notes tagged "${tag}"` : "All notes",
+//     description: tag
+//       ? `A collection of notes tagged with "${tag}"`
+//       : "A collection of all notes",
+//     openGraph: {
+//       title: tag ? `Notes tagged "${tag}"` : "All notes",
+//       description: tag
+//         ? `A collection of notes tagged with "${tag}"`
+//         : "A collection of all notes",
+//       url: tag
+//         ? `https://notehub.com/notes/tag/${encodeURIComponent(tag)}`
+//         : "https://notehub.com/notes",
+//       images: [
+//         {
+//           url: "https://ac.goit.global/fullstack/react/notehub-og-meta.jpg",
+//           width: 1200,
+//           height: 630,
+//           alt: tag ? `Notes tagged "${tag}"` : "All notes",
+//         },
+//       ],
+//     },
+//   };
+// };

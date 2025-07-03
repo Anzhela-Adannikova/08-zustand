@@ -3,21 +3,23 @@ import NotesClient from "./Notes.client";
 import { Metadata } from "next";
 
 type FilteredNotesPageProps = {
-  params: { slug: string[] };
+  params: Promise<{ slug: string[] }>;
 };
 
 export const generateMetadata = async ({
   params,
 }: FilteredNotesPageProps): Promise<Metadata> => {
-  const tag = params.slug[0] === "All" ? undefined : params.slug[0];
+  const { slug } = await params;
+  const tag = slug[0] === "All" ? "All" : slug[0];
 
   return {
-    title: tag ? `Notes tagged "${tag}"` : "All notes",
-    description: tag
-      ? `A collection of notes tagget with "${tag}"`
-      : "A collection of all notes",
+    title: tag !== "All" ? `Notes tagged "${tag}"` : "All notes",
+    description:
+      tag !== "All"
+        ? `A collection of notes tagget with "${tag}"`
+        : "A collection of all notes",
     openGraph: {
-      title: "openGraf",
+      title: `Notes: ${tag}`,
       description: "some description",
       url: "https://notehub.com/notes/",
       images: [
@@ -35,7 +37,8 @@ export const generateMetadata = async ({
 export default async function FilteredNotesPage({
   params,
 }: FilteredNotesPageProps) {
-  const tag = params.slug[0] === "All" ? undefined : params.slug[0];
+  const { slug } = await params;
+  const tag = slug[0] === "All" ? undefined : slug[0];
 
   const data = await fetchNotes(1, "", 12, tag);
 
