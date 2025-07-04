@@ -3,13 +3,13 @@ import NotesClient from "./Notes.client";
 import { Metadata } from "next";
 
 type FilteredNotesPageProps = {
-  params: Promise<{ slug: string[] }>;
+  params: { slug: string[] };
 };
 
 export const generateMetadata = async ({
   params,
 }: FilteredNotesPageProps): Promise<Metadata> => {
-  const { slug } = await params;
+  const { slug } = params;
   const tag = slug[0] === "All" ? "All" : slug[0];
 
   return {
