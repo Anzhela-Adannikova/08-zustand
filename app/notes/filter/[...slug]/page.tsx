@@ -2,14 +2,16 @@ import { fetchNotes } from "@/lib/api";
 import NotesClient from "./Notes.client";
 import { Metadata } from "next";
 
-type FilteredNotesPageProps = {
-  params: { slug: string[] };
-};
+// type FilteredNotesPageProps = {
+//   params: { slug: string[] };
+// };
 
 export const generateMetadata = async ({
   params,
-}: FilteredNotesPageProps): Promise<Metadata> => {
-  const { slug } = params;
+}: {
+  params: Promise<{ slug: string[] }>;
+}): Promise<Metadata> => {
+  const { slug } = await params;
   const tag = slug[0] === "All" ? "All" : slug[0];
 
   return {
@@ -36,7 +38,9 @@ export const generateMetadata = async ({
 
 export default async function FilteredNotesPage({
   params,
-}: FilteredNotesPageProps) {
+}: {
+  params: Promise<{ slug: string[] }>;
+}) {
   const { slug } = await params;
   const tag = slug[0] === "All" ? undefined : slug[0];
 

@@ -22,7 +22,7 @@ export default function NotePreviewPage() {
     isLoading,
     isError,
   } = useQuery<Note>({
-    queryKey: ["notes", parseId],
+    queryKey: ["note", parseId],
     queryFn: () => fetchNoteById(parseId),
     refetchOnMount: false,
   });
