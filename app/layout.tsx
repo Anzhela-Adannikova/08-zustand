@@ -50,34 +50,3 @@ export default function RootLayout({
     </html>
   );
 }
-
-// export const generateMetadata = async ({
-//   params,
-// }: FilteredNotesPageProps): Promise<Metadata> => {
-//   const { slug } = await params; // ✅ обовʼязковий await
-//   const tag = slug[0] === "All" ? undefined : slug[0];
-
-//   return {
-//     title: tag ? `Notes tagged "${tag}"` : "All notes",
-//     description: tag
-//       ? `A collection of notes tagged with "${tag}"`
-//       : "A collection of all notes",
-//     openGraph: {
-//       title: tag ? `Notes tagged "${tag}"` : "All notes",
-//       description: tag
-//         ? `A collection of notes tagged with "${tag}"`
-//         : "A collection of all notes",
-//       url: tag
-//         ? `https://notehub.com/notes/tag/${encodeURIComponent(tag)}`
-//         : "https://notehub.com/notes",
-//       images: [
-//         {
-//           url: "https://ac.goit.global/fullstack/react/notehub-og-meta.jpg",
-//           width: 1200,
-//           height: 630,
-//           alt: tag ? `Notes tagged "${tag}"` : "All notes",
-//         },
-//       ],
-//     },
-//   };
-// };
