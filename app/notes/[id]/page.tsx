@@ -8,13 +8,14 @@ import NoteDetailsClient from "./NoteDetails.client";
 import { Metadata } from "next";
 
 type Props = {
-  params: { id: string };
+  params: Promise<{ id: string }>;
 };
 
 export const generateMetadata = async ({
   params,
 }: Props): Promise<Metadata> => {
-  const parseId = Number(params.id);
+  const { id } = await params;
+  const parseId = Number(id);
   const note = await fetchNoteById(parseId);
   return {
     title: note.title,
@@ -36,8 +37,8 @@ export const generateMetadata = async ({
 };
 
 const NoteDetails = async ({ params }: Props) => {
-  // const { id } = await params;
-  const parseId = Number(params.id);
+  const { id } = await params;
+  const parseId = Number(id);
   const queryClient = new QueryClient();
 
   await queryClient.prefetchQuery({
