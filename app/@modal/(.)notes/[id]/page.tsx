@@ -7,11 +7,11 @@ import { fetchNoteById } from "@/lib/api";
 import NotePreviewPage from "./NotePreview.client";
 
 type Props = {
-  params: Promise<{ id: string }>;
+  params: { id: string };
 };
 
 const NotePreview = async ({ params }: Props) => {
-  const { id } = await params;
+  const id = params.id;
   const parseId = Number(id);
   const queryClient = new QueryClient();
 
